@@ -39,4 +39,27 @@ class AuthViewViewModel with ChangeNotifier{
   }
 
 
+
+  Future<void> signUpApi(dynamic body,BuildContext context)async {
+    setLoading(true);
+    _myRepo.registrationApi(body).then((value){
+      setLoading(false);
+      Utils.toastMessage("Registration successful");
+      Navigator.pushNamed(context, RoutesName.home);
+      if (kDebugMode) {
+        print(value.toString());
+      }
+
+    }).onError((error, stackTrace){
+      setLoading(false);
+      Utils.toastMessage(error.toString());
+      if (kDebugMode) {
+        print(error.toString());
+      }
+
+    });
+
+  }
+
+
 }

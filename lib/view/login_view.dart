@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mvvm/res/components/round_loading_btn.dart';
+import 'package:flutter_mvvm/utils/routes/routes_name.dart';
 import 'package:flutter_mvvm/utils/utils.dart';
 import 'package:flutter_mvvm/view_model/auth_view_model.dart';
 import 'package:provider/provider.dart';
@@ -22,6 +23,7 @@ class _LoginViewState extends State<LoginView> {
   @override
   Widget build(BuildContext context) {
     final authViewModel = Provider.of<AuthViewViewModel>(context);
+    final height  = MediaQuery.of(context).size.height * 1 ;
 
     return Scaffold(
       body: SafeArea(
@@ -81,9 +83,8 @@ class _LoginViewState extends State<LoginView> {
                     );
                   }),
             ),
-            const SizedBox(
-              height: 8,
-            ),
+
+            SizedBox(height: height * .04,),
             RoundButton(
                 title: "Log in",
                 loading: authViewModel.loading,
@@ -108,7 +109,15 @@ class _LoginViewState extends State<LoginView> {
 
                     authViewModel.loginApi(loginBody,context);
                   }
-                })
+                }),
+
+
+            SizedBox(height: height * .02,),
+            InkWell(
+                onTap: (){
+                  Navigator.pushNamed(context, RoutesName.signup);
+                },
+                child: const Text("Don't have an account? Register new"))
           ],
         ),
       ),
