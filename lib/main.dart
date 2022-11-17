@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mvvm/utils/routes/routes.dart';
 import 'package:flutter_mvvm/utils/routes/routes_name.dart';
 import 'package:flutter_mvvm/view_model/auth_view_model.dart';
+import 'package:flutter_mvvm/view_model/chache_user_view_model.dart';
 import 'package:provider/provider.dart';
 
 import 'res/colors.dart';
@@ -17,6 +18,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(providers: [
       ChangeNotifierProvider(create: (_) => AuthViewViewModel()),
+      ChangeNotifierProvider(create: (_) => UserViewModel()),
     ],
       child: MaterialApp(
         title: 'Flutter Demo',
@@ -24,7 +26,7 @@ class MyApp extends StatelessWidget {
           primarySwatch: AppColors.generateMaterialColorFromColor(
               AppColors.colorPrimary),
         ),
-        initialRoute: RoutesName.login,
+        initialRoute: RoutesName.splash,
         onGenerateRoute: Routes.generateRoute,
       ));
   }
