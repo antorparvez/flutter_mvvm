@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mvvm/utils/routes/routes.dart';
 import 'package:flutter_mvvm/utils/routes/routes_name.dart';
+import 'package:flutter_mvvm/view_model/auth_view_model.dart';
+import 'package:provider/provider.dart';
 
 import 'res/colors.dart';
 
@@ -13,13 +15,17 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: AppColors.generateMaterialColorFromColor(AppColors.colorPrimary),
-      ),
-      initialRoute: RoutesName.login,
-      onGenerateRoute: Routes.generateRoute,
-    );
+    return MultiProvider(providers: [
+      ChangeNotifierProvider(create: (_) => AuthViewViewModel()),
+    ],
+      child: MaterialApp(
+        title: 'Flutter Demo',
+        theme: ThemeData(
+          primarySwatch: AppColors.generateMaterialColorFromColor(
+              AppColors.colorPrimary),
+        ),
+        initialRoute: RoutesName.login,
+        onGenerateRoute: Routes.generateRoute,
+      ));
   }
 }
