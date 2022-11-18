@@ -1,12 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_mvvm/repository/auth_repository.dart';
-import 'package:flutter_mvvm/utils/routes/routes_name.dart';
 import 'package:flutter_mvvm/utils/utils.dart';
 import 'package:flutter_mvvm/view_model/chache_user_view_model.dart';
 import 'package:provider/provider.dart';
 
 import '../model/user_model.dart';
+import '../view/home_view.dart';
 
 class AuthViewViewModel with ChangeNotifier {
   final _myRepo = AuthRepository();
@@ -29,7 +30,10 @@ class AuthViewViewModel with ChangeNotifier {
           UserModel(token: value['token'].toString(), id: value['id']));
 
       Utils.toastMessage("Login successful");
-      Navigator.pushNamed(context, RoutesName.home);
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (context) => const HomeView()));
+      //Navigator.pushNamed(context, RoutesName.home);
+
       if (kDebugMode) {
         print(value.toString());
       }
@@ -50,7 +54,12 @@ class AuthViewViewModel with ChangeNotifier {
       userPreference.saveToCache(
           UserModel(token: value['token'].toString(), id: value['id']));
       Utils.toastMessage("Registration successful");
-      Navigator.pushNamed(context, RoutesName.home);
+      //Navigator.pushNamed(context, RoutesName.home);
+      Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const HomeView(),
+          ));
       if (kDebugMode) {
         print(value.toString());
       }

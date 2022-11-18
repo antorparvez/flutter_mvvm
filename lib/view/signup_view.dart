@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mvvm/view/login_view.dart';
 import 'package:flutter_mvvm/view_model/auth_view_model.dart';
 import 'package:provider/provider.dart';
 
@@ -124,7 +125,10 @@ class _SignUpViewState extends State<SignUpView> {
             SizedBox(height: height * .02,),
             InkWell(
                 onTap: (){
-                  Navigator.pushNamed(context, RoutesName.login);
+                 // Navigator.pushNamed(context, RoutesName.login);
+
+                  Navigator.pushReplacement(
+                      context, MaterialPageRoute(builder: (context) => const LoginView()));
                 },
                 child: Text("Already have an account? Login"))
 
